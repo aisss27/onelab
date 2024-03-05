@@ -14,16 +14,20 @@ export const List = () => {
         sessionStorage.setItem('list', JSON.stringify(updatedList));
     };
 
-    const onDeleteHandler = (index) => {
-        const updatedList = data.filter((_, i) => i !== index);
-        updateListAndStorage(updatedList);
-    };
-
+    //edit
     const onEditHandler = (index, editedContent) => {
         const updatedList = [...data];
         updatedList[index] = { ...updatedList[index], ...editedContent };
         updateListAndStorage(updatedList);
     };
+
+    //delete
+    const onDeleteHandler = (index) => {
+        const updatedList = data.filter((_, i) => i !== index);
+        updateListAndStorage(updatedList);
+    };
+
+
 
     return (
         <div>
