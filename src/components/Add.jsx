@@ -44,9 +44,9 @@ export const Add = () => {
         <div className='form'>
             <div className="form-content">
                 <h2>FORM</h2>
-                <input value={name} onChange={handleNameChange} />
-                <input value={surname} onChange={handleSurnameChange} />
-                <input value={phone} onChange={handlePhoneChange} />
+                <input value={name} placeholder='name' onChange={handleNameChange} />
+                <input value={surname} placeholder='surname' onChange={handleSurnameChange} />
+                <input value={phone} placeholder='phone number' onChange={handlePhoneChange} />
                 <button onClick={onSave}>Submit</button>
             </div>
         </div>
