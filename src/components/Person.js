@@ -41,7 +41,9 @@ export const Person = ({ person, onDelete, onEdit }) => {
                     autoFocus
                 />
             ) : (
-                <p onDoubleClick={handleDoubleClick}>{person.name}</p>
+                <>
+                    <p onDoubleClick={handleDoubleClick}>{editedName}</p>
+                </>
             )}
             <p>{person.surname}</p>
             <p>{person.phone}</p>
