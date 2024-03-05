@@ -23,7 +23,7 @@ export const Add = () => {
     }
 
     const onSave = () => {
-        if(!name && !surname && !phone) return
+        if(!name || !surname || !phone) return
         let list = sessionStorage.getItem("list");
         if(!list) {
             list = [];
