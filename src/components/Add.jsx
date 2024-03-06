@@ -39,6 +39,41 @@ export const Add = () => {
         navigate('/');
 
     }
+
+const repo = {
+    onSave() {
+        const promise = new Promise((resolve, reject) => {
+            try{
+                if(!name || !surname || !phone) return
+                let list = sessionStorage.getItem("list");
+                if(!list) {
+                    list = [];
+                } else {
+                    list = JSON.parse(list);
+                }
+                list.push({
+                    name,
+                    surname,
+                    phone
+                })
+                sessionStorage.setItem('list', JSON.stringify(list));
+                navigate('/');
+                resolve();
+            }catch(error){
+                reject(error)
+            }
+        })
+    return promise;
+    }
+}
+
+const onSaveHandler = () => {
+        repo.onSave()
+            .then(() => alert('User Added: ' + name))
+            .catch((error) => alert('Invalid user ' + error))
+}
+
+
     return (
 
         <div className='form'>
@@ -47,7 +82,7 @@ export const Add = () => {
                 <input value={name} placeholder='name' onChange={handleNameChange} />
                 <input value={surname} placeholder='surname' onChange={handleSurnameChange} />
                 <input value={phone} placeholder='phone number' onChange={handlePhoneChange} />
-                <button onClick={onSave}>Submit</button>
+                <button onClick={onSaveHandler}>Submit</button>
             </div>
         </div>
     )

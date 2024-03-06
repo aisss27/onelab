@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Person } from "./Person";
 
+
 export const List = () => {
     const [data, setData] = useState([]);
 
@@ -14,17 +15,39 @@ export const List = () => {
         sessionStorage.setItem('list', JSON.stringify(updatedList));
     };
 
+    const repo = {
+        updateListAndStorage(updatedList) {
+            const promise = new Promise((resolve, rejected) => {
+                try {
+                    setData(updatedList);
+                    sessionStorage.setItem('list', JSON.stringify(updatedList));
+                    resolve();
+                } catch (error) {
+                    rejected(error)
+                }
+            })
+            return promise;
+        }
+    }
+
+
     //edit
     const onEditHandler = (index, editedContent) => {
         const updatedList = [...data];
-        updatedList[index] = { ...updatedList[index], ...editedContent };
-        updateListAndStorage(updatedList);
+        updatedList[index] = { ...updatedList[index],name: editedContent };
+        // updateListAndStorage(updatedList);
+        repo.updateListAndStorage(updatedList)
+        .then(() => alert('Edited name: ' + editedContent))
+            .catch(error => alert('Failed' + error))
     };
 
     //delete
     const onDeleteHandler = (index) => {
         const updatedList = data.filter((_, i) => i !== index);
-        updateListAndStorage(updatedList);
+        // updateListAndStorage(updatedList);
+        repo.updateListAndStorage(updatedList)
+            .then(() => alert('User Deleted'))
+            .catch(error => alert('Not deleted from storage ' + error))
     };
 
 
