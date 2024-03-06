@@ -3,9 +3,9 @@ import {useState} from "react";
 import './style.css'
 
 export const Add = () => {
-    const [name,setName] = useState('')
-    const [surname,setSurname] = useState('')
-    const [phone,setPhone] = useState('')
+    const [name, setName] = useState('')
+    const [surname, setSurname] = useState('')
+    const [phone, setPhone] = useState('')
 
     const navigate = useNavigate();
 
@@ -23,9 +23,9 @@ export const Add = () => {
     }
 
     const onSave = () => {
-        if(!name || !surname || !phone) return
+        if (!name || !surname || !phone) return
         let list = sessionStorage.getItem("list");
-        if(!list) {
+        if (!list) {
             list = [];
         } else {
             list = JSON.parse(list);
@@ -40,38 +40,38 @@ export const Add = () => {
 
     }
 
-const repo = {
-    onSave() {
-        const promise = new Promise((resolve, reject) => {
-            try{
-                if(!name || !surname || !phone) return
-                let list = sessionStorage.getItem("list");
-                if(!list) {
-                    list = [];
-                } else {
-                    list = JSON.parse(list);
+    const repo = {
+        onSave() {
+            const promise = new Promise((resolve, reject) => {
+                try {
+                    if (!name || !surname || !phone) return
+                    let list = sessionStorage.getItem("list");
+                    if (!list) {
+                        list = [];
+                    } else {
+                        list = JSON.parse(list);
+                    }
+                    list.push({
+                        name,
+                        surname,
+                        phone
+                    })
+                    sessionStorage.setItem('list', JSON.stringify(list));
+                    navigate('/');
+                    resolve();
+                } catch (error) {
+                    reject(error)
                 }
-                list.push({
-                    name,
-                    surname,
-                    phone
-                })
-                sessionStorage.setItem('list', JSON.stringify(list));
-                navigate('/');
-                resolve();
-            }catch(error){
-                reject(error)
-            }
-        })
-    return promise;
+            })
+            return promise;
+        }
     }
-}
 
-const onSaveHandler = () => {
-        repo.onSave()
-            .then(() => alert('User Added: ' + name))
-            .catch((error) => alert('Invalid user ' + error))
-}
+    const onSaveHandler = async () => {
+        await repo.onSave()
+        alert('User Added: ' + name);
+
+    }
 
 
     return (
@@ -79,9 +79,9 @@ const onSaveHandler = () => {
         <div className='form'>
             <div className="form-content">
                 <h2>FORM</h2>
-                <input value={name} placeholder='name' onChange={handleNameChange} />
-                <input value={surname} placeholder='surname' onChange={handleSurnameChange} />
-                <input value={phone} placeholder='phone number' onChange={handlePhoneChange} />
+                <input value={name} placeholder='name' onChange={handleNameChange}/>
+                <input value={surname} placeholder='surname' onChange={handleSurnameChange}/>
+                <input value={phone} placeholder='phone number' onChange={handlePhoneChange}/>
                 <button onClick={onSaveHandler}>Submit</button>
             </div>
         </div>
