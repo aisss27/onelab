@@ -6,6 +6,8 @@ export const Home = () => {
         <nav className='navigation-menu'>
             <Link to='/add'>Navigate to ADD</Link>
             <Link to='/list'>Navigate to LIST</Link>
+
+            <Link to='/counter'>Navigate to Counter</Link>
         </nav>
     )
 }
