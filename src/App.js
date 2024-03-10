@@ -6,6 +6,8 @@ import {List} from "./components/List";
 import {Provider} from "react-redux";
 import {store} from "./redux/store";
 import {Counter} from "./components/Counter";
+import {AddRedux} from "./components/AddRedux";
+import {ListRedux} from "./components/ListRedux";
 
 
 function App() {
@@ -16,11 +18,11 @@ function App() {
     },
     {
       path: '/add',
-      element: <Add/>
+      element: <AddRedux/>
     },
     {
       path: '/list',
-      element: <List/>
+      element: <ListRedux/>
     },
     {
       path: '/counter',
